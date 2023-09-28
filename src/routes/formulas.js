@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-
 // connexion sql 
-const mysqlConnection = require('../bd/database');
+const mysqlConnection = require('../database');
 
-// crear URL PARA ACCEDER A LOS DATOS 
 
+// crear URL PARA ACCEDER A LOS DATOS y hacer peticiones 
 router.get('/', (req, res)=>{
     mysqlConnection.query(' SELECT * FROM  tb_datos td ', (err, rows, fields) =>{
         if (!err){
@@ -13,9 +12,12 @@ router.get('/', (req, res)=>{
         }else{
             console.log(err);
         }
-    })
+    });
 });
 
+
+
+/*
 router.get('/:id', (req, res)=>{
   //req.params;
   const {id} = req.params;
@@ -27,9 +29,8 @@ router.get('/:id', (req, res)=>{
 			console.log(err);
 		}
   });
-});
+});*/
 
 //ruta 
-router.post()
 
 module.exports = router;

@@ -4,14 +4,15 @@
   "description": "// Bueno este es unos de las muchas primeras, pruebas que se van a realizar para dar inicio a MI API \r // aqui voy a anotar todos los commandos y las cosas que hice o agrege",
   "main": "index.js",
   "scripts": {
-    "dev":"nodemon src/index.js"
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

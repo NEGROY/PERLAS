@@ -8,6 +8,15 @@
 5. (eN Package.JSON en al parte de script, susutitui , "test": "echo \"Error: no test specified\" && exit 1"
 por "dev":"nodemon src/indes.js")
  
+ npm install -g mysql
+
  en consola   npm run dev,  para mostrar cpor consola el proyecto
  
- 
+ // EJEPLO DE PROCEDIMIENTO
+ create procedure addoredit(
+    IN _id int, 
+    IN _name VARCHAR(45), 
+    IN salary int, 
+ )
+ begin 
+    if _id 
