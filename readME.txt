@@ -1,6 +1,9 @@
 // Bueno este es unos de las muchas primeras, pruebas que se van a realizar para dar inicio a MI API 
 // aqui voy a anotar todos los commandos y las cosas que hice o agrege 
 
+
+https://www.youtube.com/watch?v=3dSkc-DIM74&t=30s
+
 1. principalmente, (node js, postman )
 2. npm init --yes (crea Package.json)
 3. MODULOS A INTALAR, (express , morgan )  npm i express morgan

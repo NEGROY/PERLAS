@@ -12,7 +12,6 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json()); //para resivir y entender json
 
-
 // Routes 
 app.use(require('./routes/formulas'));
 

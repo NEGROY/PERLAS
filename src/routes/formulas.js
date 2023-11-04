@@ -6,7 +6,7 @@ const mysqlConnection = require('../database');
 
 // crear URL PARA ACCEDER A LOS DATOS y hacer peticiones 
 router.get('/', (req, res)=>{
-    mysqlConnection.query(' SELECT * FROM  tb_datos td ', (err, rows, fields) =>{
+    mysqlConnection.query('SELECT * FROM tb_datos WHERE INDI = "P1" ', (err, rows, fields) =>{
         if (!err){
             res.json(rows);
         }else{
@@ -15,7 +15,17 @@ router.get('/', (req, res)=>{
     });
 });
 
-
+// CON EL CODIGO DE LOS INDICADORES SE TRAERA TODOS LOS INDICADORES DE ESE VALOR 
+router.get('/:id', (req, res)=>{
+    const {id} = req.params;
+    mysqlConnection.query('SELECT * FROM tb_datos WHERE INDI = = ?', [id], (err, rows, fields) =>{
+        if (!err){
+            res.json(rows);
+        }else{
+            console.log(err);
+        }
+    });
+});
 
 /*
 router.get('/:id', (req, res)=>{
