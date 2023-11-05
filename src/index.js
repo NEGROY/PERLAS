@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 
+//import updt from './routes/upd.routes.js'
+
 //settings
 app.set(`port`, process.env.PORT || 3000); // si un SO nos da un purto lo usamos si no el 3K
 app.set(`json spaces`, 2);
@@ -13,7 +15,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json()); //para resivir y entender json
 
 // Routes 
-app.use(require('./routes/formulas'));
+app.use(require('./routes/indi.routes'));
+//app.use(require('./routes/crud.routes'));
 
 // inicar el server 
 app.listen( app.get('port'), ()=>{

@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "// Bueno este es unos de las muchas primeras, pruebas que se van a realizar para dar inicio a MI API \r // aqui voy a anotar todos los commandos y las cosas que hice o agrege",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src2/index.js"
   },
   "keywords": [],
   "author": "",
