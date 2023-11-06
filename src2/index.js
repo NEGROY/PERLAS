@@ -1,6 +1,6 @@
 import  express  from "express";
 //a;ado mas ruitas
-import crudes from './ruta/crud.ruta.js'
+import crudes from './ruta/formu.ruta.js'
 import perlas from './ruta/perlas.ruta.js'
 
 const app = express()
