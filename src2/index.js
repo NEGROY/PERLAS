@@ -18,3 +18,10 @@ app.listen( app.get('port'), ()=>{
     console.log('hola muchas');
     console.log(`puerto ${app.get('port')}`);
 });
+
+
+/*
+    * llamaremos a PERLA (CADA UNA DE LAS LETRAS DE P E A R L S )
+    * LLAMAREMOS A los indicadores los cuales son (P1 P2 ... S9 ) PERO YA PROCESADOS
+    * iNDICES (P1 P2 ... S9 ) PERO QUE NO SE HAN PROCESADOS
+*/
