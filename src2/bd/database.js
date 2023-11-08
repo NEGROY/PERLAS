@@ -1,4 +1,4 @@
-import { createPool } from "mysql";
+import { createPool } from "mysql2/promise";
 
 export const conn = createPool({
     host:   '3.132.48.124',
@@ -7,10 +7,14 @@ export const conn = createPool({
     database: 'occi_negroy'
 });
 
-
-
-
 /*
+export const conn = createPool({
+    host:   '3.132.48.124',
+    user:     'occi_negroy',
+    password: 'Pokemon24685',
+    database: 'occi_negroy'
+});
+
 const mysql = require('mysql');
 // CONEXCION 
 export const mysqlConnection = mysql.createConnection({

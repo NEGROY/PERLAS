@@ -12,6 +12,7 @@ https://www.youtube.com/watch?v=3dSkc-DIM74&t=30s
 por "dev":"nodemon src/indes.js")
  
  npm install -g mysql
+npm install mysql2
 
  en consola   npm run dev,  para mostrar cpor consola el proyecto
  
