@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {conn} from "../bd/database.js";
-import { getIndi, getTri, getVarData } from "../controllersXD/perlas.control.js";
+import { getIndi, getTri, getVarData, getIndiFind } from "../controllersXD/perlas.control.js";
 //CREO MI CONSTANTE PARA LA RUTAS LOCAS 
 const router = Router()
 
@@ -8,6 +8,7 @@ const router = Router()
 
 // CON EL CODIGO DE LOS INDICADORES SE TRAERA TODOS LOS INDICADORES DE ESE VALOR  // //(localhost:3000/indi/P1)
 router.get('/indi/:id', getIndi );
+router.get('/indi/:id/:tri/:year', getIndiFind );
 
 // CON EL CODIGO DE LOS INDICADORES SE TRAERA TODOS LOS INDICADORES DE ESE VALOR  //(localhost:3000/indi/Primer/P1)
 router.get('/indi/:tri/:id', getTri );

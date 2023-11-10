@@ -1,4 +1,5 @@
 import {conn} from "../bd/database.js";
+import {validateYear, validateTrimestre} from "../include/fun.funciones.js";
 
 /*************************************************************************************************************************** */
 // PRIMERA  PRUEBA, para verbo post 
@@ -23,8 +24,7 @@ export const postDataIndi00 = (req, res)=>{
     return res.status(400).json({ error: 'indi y FORMULA son campos obligatorios' });
   }
   // Validación para comprobar si FORMULA menciona los valores (Primer, Segundo, Tercero, Cuarto) 
-  const formulaValues = ['Primer', 'Segundo', 'Tercero', 'Cuarto'];
-  if (!formulaValues.some(value => FORMULA.includes(value))) {
+  if (validateTrimestre(FORMULA)){
     return res.status(400).json({ error: 'FORMULA debe mencionar al menos uno de los valores: Primer, Segundo, Tercero, Cuarto' });
   }
   // Obtener la fecha y hora actual en el formato especificado (023-08-29 10:55:05.000)
@@ -53,12 +53,11 @@ export const postDataIndi = async (req,res)=>{
     return res.status(400).json({ error: 'TODOS son campos obligatorios' });
   }
   // VALIDA QUE TENGA TRIMESTRE UN VALOR NECESARIO
-  const formulaValues = ['Primer', 'Segundo', 'Tercero', 'Cuarto'];
-  if (!formulaValues.some(value => Trimestre.includes(value))) {
+  if (validateTrimestre(Trimestre)) {
     return res.status(400).json({ error: 'Trimestre debe mencionar al menos uno de los valores: Primer, Segundo, Tercero, Cuarto' });
   }
   // Validación para comprobar si "year" es un año válido (mayor o igual a 2020 y menor que 2030)
-  if (isNaN(year) || year < 2020 || year >= 2030) {
+  if (validateYear(year)) {
     return res.status(400).json({ error: 'El campo AÑO(Year) debe ser un año válido, mayor o igual a 2020 y menor a 2030' });
   }
   // Obtener la fecha y hora actual en el formato especificado (023-08-29 10:55:05.000)
@@ -77,7 +76,7 @@ export const postDataIndi = async (req,res)=>{
 }
 
 /*************************************************************************************************************************** */
-/* FUNCION PARA AGREGAR VALORES (PERO DE FORMA MUPLTIPLE) ＼ʕ •ᴥ•ʔ／
+/* FUNCION PARA AGREGAR VALORES (PERO DE FORMA MUPLTIPLE) ＼ʕ •ᴥ•ʔ／ 
   ᕕ( ᐛ )ᕗ  VOY A INTENTAR CREAR UNA  FUNCION PARA INGRESAR MAS DE UN SOLO OBJETO QUE PUEDA TENER MULTIPLES [{...},{...},{...}]*/
 /*************************************************************************************************************************** */
 export const PostMultiDatos = async (req, res) => {
@@ -95,7 +94,14 @@ export const PostMultiDatos = async (req, res) => {
       return res.status(400).json({ error: 'Cada objeto debe contener todos los campos obligatorios' });
     }
     // Aquí puedes realizar cualquier otra validación necesaria para cada objeto
-     //---- SE REALIZA EL INSERT
+    if (validateTrimestre(Trimestre)) {
+      return res.status(400).json({ error: 'TRIMESTRE debe mencionar al menos uno de los valores: Primer, Segundo, Tercero, Cuarto' });
+    }
+    // Validación Año
+    if (validateYear(year)) {
+      return res.status(400).json({ error: 'El campo AÑO(Year) debe ser un año válido, mayor o igual a 2020 y menor a 2030' });
+    }
+    //---- SE REALIZA EL INSERT
     // Consulta SQL para hacer el INSERT (para que funcione el AWAIT, hay que colocar async)
     try {
       const currentDate = new Date();
