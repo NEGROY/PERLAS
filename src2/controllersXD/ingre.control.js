@@ -1,8 +1,8 @@
 import {conn} from "../bd/database.js";
 
 /*************************************************************************************************************************** */
-/*************************************************************************************************************************** */
 // PRIMERA  PRUEBA, para verbo post 
+/*************************************************************************************************************************** */
 export const postDataIndi00 = (req, res)=>{
     const {id} = req.params;
     //  conn.query('INSERT INTO tb_datos VALUES (null,?,?, 12,"2023-11-06 10:55:05.000", "Segundo", "Mayo", 2024)',[] );
@@ -12,8 +12,8 @@ export const postDataIndi00 = (req, res)=>{
 }
 
 /*************************************************************************************************************************** */
-/*************************************************************************************************************************** */
 // POST PARA EL IGRESO DE DATOS, TB_DATOS (hasta que se arreglo esa mierda, revisar las notas al fondo )
+/*************************************************************************************************************************** */
   export const pRUEBA11 = async (req, res)=>{
   // constante para almacenar datos POST 
     const {indi,FORMULA} = req.body ////console.log(req.body) 
@@ -42,8 +42,9 @@ export const postDataIndi00 = (req, res)=>{
   } 
 
   /*************************************************************************************************************************** */
+  // funcion para el ingreso de tb_Datos, esta info es para el ingreso de los datos de la BD y despues procesar los valores 
+  //  ლ(ಠ益ಠლ) || PERO ME LLEVA LA VERGA SOLO UN OBJETO JSON PUEDO SUBIR, NO PUEDO RECIBIR MAS DE UN VALOR [{...}]
   /*************************************************************************************************************************** */
-// funcion para el ingreso de tb_Datos, esta info es para el ingreso de los datos de la BD y despues procesar los valores 
 export const postDataIndi = async (req,res)=>{
   //se declaran los valores que se esperan, con REQ.BODY
     const {indi,vari,valor,Trimestre,Mes,year} = req.body
@@ -76,9 +77,10 @@ export const postDataIndi = async (req,res)=>{
 }
 
 /*************************************************************************************************************************** */
+/* FUNCION PARA AGREGAR VALORES (PERO DE FORMA MUPLTIPLE) ＼ʕ •ᴥ•ʔ／
+  ᕕ( ᐛ )ᕗ  VOY A INTENTAR CREAR UNA  FUNCION PARA INGRESAR MAS DE UN SOLO OBJETO QUE PUEDA TENER MULTIPLES [{...},{...},{...}]*/
 /*************************************************************************************************************************** */
-// FUNCION PARA AGREGAR VALORES 
-export const postDatos = async (req, res) => {
+export const PostMultiDatos = async (req, res) => {
   // Array de objetos JSON con datos
   const data = req.body;
   // Validación para comprobar si el arreglo de datos está presente
@@ -93,20 +95,24 @@ export const postDatos = async (req, res) => {
       return res.status(400).json({ error: 'Cada objeto debe contener todos los campos obligatorios' });
     }
     // Aquí puedes realizar cualquier otra validación necesaria para cada objeto
+     //---- SE REALIZA EL INSERT
     // Consulta SQL para hacer el INSERT (para que funcione el AWAIT, hay que colocar async)
     try {
       const currentDate = new Date();
-      const formattedDate = currentDate.toISOString().slice(2, 19).replace('T', ' ');
-      const rows = await conn.query('INSERT INTO tb_formula (INDI, VARI, VALOR, TRIMESTRE, MES, YEAR, FORMULA, FECHA_HORA) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [indi, vari, valor, Trimestre, Mes, year, FORMULA, formattedDate]);
-      insertedData.push({ id: rows.insertId, indi, vari, valor, Trimestre, Mes, year, FORMULA, FECHA_HORA: formattedDate });
+      const fechaSys = currentDate.toISOString().slice(2, 19).replace('T', ' ');
+      const rows = await conn.query('INSERT INTO tb_datos (INDI,var,value,date,Trimestre,Mes,year) VALUES (?,?,?,?,?,?,?)', [indi,vari,valor,fechaSys,Trimestre,Mes,year]);
+      insertedData.push({ indi, vari, valor, FECHA_HORA: fechaSys, Trimestre, Mes, year });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: 'Hubo un error al procesar la solicitud' });
     }
   }
   res.json(insertedData);
-}
+} 
 
+/*************************************************************************************************************************** */
+/* ESTA  SERA LA FUNCION PARA INGRESAR LOS DATOS YA PROCESADOS DEL SISTEMA  */
+/*************************************************************************************************************************** */
 
 /*
     *INSERT INTO tb_datos 
@@ -141,10 +147,28 @@ export const postDatos = async (req, res) => {
 ]
 
 //------ EJEMPLO
-  [{ "id": 1,  "indi": "P1",  "vari": "a",  "valor": 15000,  "Trimestre": "Cuarto",  "Mes": "Diciembre",
-  "year": 2023,  "FORMULA": "100" }, 
-  {  "id": 1,  "indi": "P1",  "vari": "b",  "valor": 100,  "Trimestre": "Cuarto",  "Mes": "Diciembre",
-  "year": 2023,  "FORMULA": "100" },  
-{  "id": 1,  "indi": "P1",  "vari": "c",  "valor": 10000,  "Trimestre": "Cuarto",
-  "Mes": "Diciembre",  "year": 2023,  "FORMULA": "100"} ]
+  [{ "id": 1,
+  "indi": "P1",  
+  "vari": "a",  
+  "valor": 15000,  
+  "Trimestre": "Cuarto",  
+  "Mes": "Diciembre",
+  "year": 2023,  
+  "FORMULA": "100" }, 
+  {  "id": 1,  
+  "indi": "P2",  
+  "vari": "b",  
+  "valor": 100, 
+  "Trimestre": "Cuarto", 
+  "Mes": "Diciembre",
+  "year": 2023,
+  "FORMULA": "100" },
+{  "id": 1,  
+"indi": "P3",  
+"vari": "c",
+"valor": 10000,
+"Trimestre": "Cuarto",
+  "Mes": "Diciembre", 
+  "year": 2023,  
+  "FORMULA": "100"} ]
 */
