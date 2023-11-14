@@ -65,7 +65,7 @@ export const postDataIndi = async (req,res)=>{
     const fechaSys = currentDate.toISOString().slice(2, 19).replace('T', ' ');
   //---- SE REALIZA EL INSERT
   try {
-    const rows = await conn.query('INSERT INTO tb_datos (INDI,var,value,date,Trimestre,Mes,year) value (?,?,?,?,?,?,?)', 
+    const rows = await conn.query('INSERT INTO tb_datos (INDI,var,valors,date,Trimestre,Mes,year) value (?,?,?,?,?,?,?)', 
     [indi,vari,valor,fechaSys,Trimestre,Mes,year])
     //Respomdemos con los datos traidos
     res.json({id:rows.insertId,indi,vari,valor,fechaSys,Trimestre,Mes,year}) 
@@ -106,7 +106,7 @@ export const PostMultiDatos = async (req, res) => {
     try {
       const currentDate = new Date();
       const fechaSys = currentDate.toISOString().slice(2, 19).replace('T', ' ');
-      const rows = await conn.query('INSERT INTO tb_datos (INDI,var,value,date,Trimestre,Mes,year) VALUES (?,?,?,?,?,?,?)', [indi,vari,valor,fechaSys,Trimestre,Mes,year]);
+      const rows = await conn.query('INSERT INTO tb_datos (INDI,var,valors,date,Trimestre,Mes,year) VALUES (?,?,?,?,?,?,?)', [indi,vari,valor,fechaSys,Trimestre,Mes,year]);
       insertedData.push({ indi, vari, valor, FECHA_HORA: fechaSys, Trimestre, Mes, year });
     } catch (error) {
       console.log(error);

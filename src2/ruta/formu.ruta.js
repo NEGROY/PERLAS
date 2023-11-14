@@ -1,6 +1,6 @@
 import { Router } from "express";
-
 import { getdetalle, getdetalleID, getFormula } from "../controllersXD/formu.control.js";
+
 //CREO MI CONSTANTE PARA LA RUTAS LOCAS 
 const router = Router()
 
@@ -15,8 +15,6 @@ router.get('/titulo/:id', getdetalleID);
 router.get('/formula/:id', getFormula);
 
 // TRAE 
-
-
 //SE EXPORTA ()
 export default router
 
